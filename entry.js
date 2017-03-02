@@ -14,7 +14,7 @@ const init = () => {
   lifeBoard.constructGrid()
   lifeBoard.renderBoard()
   const mover = new Movement(lifeBoard);
-  mover.checkCells()
+  mover.moveCells()
 }
 
 

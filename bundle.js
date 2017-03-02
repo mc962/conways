@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -84,7 +84,8 @@ var Board = function () {
     _classCallCheck(this, Board);
 
     ////////////////////////
-    this.startConfig = [[0, 0], [0, 1]];
+    this.startConfig = [[4, 2], [2, 3], [4, 3], [3, 4], [4, 4]];
+    // this.startConfig = [[2,2], [2,3], [2,4]]
     ////////////////////////
     this.containerEl = $(boardContainer);
     this.board = [];
@@ -107,7 +108,7 @@ var Board = function () {
     value: function constructGrid() {
 
       for (var i = 0; i < Math.sqrt(this.boardSize); i++) {
-        // this.board.append(this.buildRow(i));
+
         this.board.push(this.buildRow(i));
       }
       this.applyConfiguration();
@@ -117,18 +118,17 @@ var Board = function () {
     value: function applyConfiguration() {
       for (var i = 0; i < this.startConfig.length; i++) {
         var space = this.board[this.startConfig[i][0]][this.startConfig[i][1]];
-        space.fillToggler(space.cell);
+        space.addFill(space.cell);
       }
     }
   }, {
     key: 'buildRow',
     value: function buildRow(rowIdx) {
-      // const $row = $('<ul>').addClass('row');
+
       var gridRow = [];
       for (var colIdx = 0; colIdx < Math.sqrt(this.boardSize); colIdx++) {
         var square = new Cell([rowIdx, colIdx]);
         gridRow.push(square);
-        // $row.append(square.cell);
       }
       return gridRow;
     }
@@ -147,27 +147,6 @@ var Board = function () {
 
   return Board;
 }();
-
-//
-// class Tile {
-//   constructor(i, j, ctx) {
-//
-//     this.filled = this.setInitialFill([i,j])
-//
-//     this.filled ? ctx.fillStyle = '#7CC432' : ctx.fillStyle = '#B45002';
-//     ctx.fill()
-//   }
-//
-//   /// will later be used to preset certain fill configurations, for now
-//   /// everything will start as false
-//   setInitialFill(coords) {
-//     return false;
-//   }
-//   toggleColor(e) {
-//
-//   }
-// }
-
 
 module.exports = Board;
 
@@ -210,14 +189,20 @@ var Cell = function () {
     value: function squareClickHandler(e) {
       var clickedEl = $(e.currentTarget);
 
-      this.fillToggler(clickedEl);
+      clickedEl.toggleClass('filled');
+      this.fillStatus = !this.fillStatus;
     }
   }, {
-    key: 'fillToggler',
-    value: function fillToggler(el) {
-
-      el.toggleClass('filled');
+    key: 'addFill',
+    value: function addFill(el) {
+      el.addClass('filled');
       this.fillStatus = true;
+    }
+  }, {
+    key: 'removeFill',
+    value: function removeFill(el) {
+      el.removeClass('filled');
+      this.fillStatus = false;
     }
   }]);
 
@@ -228,31 +213,6 @@ module.exports = Cell;
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var Board = __webpack_require__(0);
-var Movement = __webpack_require__(3);
-
-var init = function init() {
-
-  console.log('Init');
-  var boardContainer = document.getElementById('canvasLife');
-
-  var testBoardSize = 100;
-  var lifeBoard = new Board(boardContainer, testBoardSize);
-  lifeBoard.constructGrid();
-  lifeBoard.renderBoard();
-  var mover = new Movement(lifeBoard);
-  mover.checkCells();
-};
-
-document.addEventListener('DOMContentLoaded', init);
-
-/***/ }),
-/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -274,19 +234,31 @@ var Movement = function () {
 
   _createClass(Movement, [{
     key: 'moveCells',
-    value: function moveCells() {}
+    value: function moveCells() {
+      var _this = this;
+
+      console.log("Let's get moving!");
+      window.setInterval(function () {
+        _this.checkCells();
+      }, 1000);
+    }
   }, {
     key: 'checkCells',
     value: function checkCells() {
-
+      this.willDieCells = [];
+      this.willLiveCells = [];
       for (var i = 0; i < this.gameBoard.board.length; i++) {
         var boardRow = this.gameBoard.board[i];
         for (var j = 0; j < boardRow.length; j++) {
           var currentCell = boardRow[j];
           this.countNeighbors(currentCell);
-          console.log(currentCell.coord + ', ' + currentCell.neighbors);
+          this.checkLife(currentCell);
+          if (currentCell.neighbors === 3) {
+            this.makeLife(currentCell);
+          }
         }
       }
+      this.updateBoard();
     }
   }, {
     key: 'countNeighbors',
@@ -326,11 +298,34 @@ var Movement = function () {
     }
   }, {
     key: 'checkLife',
-    value: function checkLife(cell) {
-      if (cell.fillStatus) {
-        if (cell.neighbors > 4 || cell.neighbors < 2) {
-          cell.fillToggler(cell);
-        }
+    value: function checkLife(square) {
+
+      console.log('Checking for a pulse...');
+
+      if (square.neighbors >= 4 || square.neighbors < 2) {
+        this.willDieCells.push(square);
+      }
+    }
+  }, {
+    key: 'makeLife',
+    value: function makeLife(square) {
+
+      console.log('Undergoing mitosis...');
+      this.willLiveCells.push(square);
+    }
+  }, {
+    key: 'updateBoard',
+    value: function updateBoard() {
+      debugger;
+      for (var i = 0; i < this.willLiveCells.length; i++) {
+
+        var liveSquare = this.willLiveCells[i];
+        liveSquare.addFill(liveSquare.cell);
+      }
+
+      for (var _i = 0; _i < this.willDieCells.length; _i++) {
+        var dieSquare = this.willDieCells[_i];
+        dieSquare.removeFill(dieSquare.cell);
       }
     }
   }]);
@@ -339,6 +334,31 @@ var Movement = function () {
 }();
 
 module.exports = Movement;
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Board = __webpack_require__(0);
+var Movement = __webpack_require__(2);
+
+var init = function init() {
+
+  console.log('Init');
+  var boardContainer = document.getElementById('canvasLife');
+
+  var testBoardSize = 100;
+  var lifeBoard = new Board(boardContainer, testBoardSize);
+  lifeBoard.constructGrid();
+  lifeBoard.renderBoard();
+  var mover = new Movement(lifeBoard);
+  mover.moveCells();
+};
+
+document.addEventListener('DOMContentLoaded', init);
 
 /***/ })
 /******/ ]);

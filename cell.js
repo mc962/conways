@@ -19,15 +19,20 @@ class Cell {
   squareClickHandler(e) {
     let clickedEl = $(e.currentTarget);
 
-
-    this.fillToggler(clickedEl);
+    clickedEl.toggleClass('filled');
+    this.fillStatus = !this.fillStatus
+    
   }
 
-  fillToggler(el) {
-    
-    el.toggleClass('filled');
+  addFill(el) {
+    el.addClass('filled')
     this.fillStatus = true;
   }
+  removeFill(el) {
+    el.removeClass('filled');
+    this.fillStatus = false;
+  }
+
 }
 
 module.exports = Cell;
