@@ -1,33 +1,62 @@
+const Cell = require('./cell.js');
+
 class Board {
   constructor(boardContainer, size) {
-    this.board = $(boardContainer)
+    ////////////////////////
+    this.startConfig = [[0, 0], [0, 1]]
+    ////////////////////////
+    this.containerEl = $(boardContainer);
+    this.board = [];
+
     this.boardSize = size;
 
   }
 
+// getSpace(pos) {
+//   return this.grid[pos[0]][pos[1]]
+// }
+//
+// setSpace(pos, val) {
+//   this.grid[pos[0]][pos[1]] = val;
+//   return val;
+// }
+
+
   constructGrid() {
 
     for (let i = 0; i < Math.sqrt(this.boardSize); i++) {
-      this.board.append(this.buildRow(i));
+      // this.board.append(this.buildRow(i));
+      this.board.push(this.buildRow(i))
+    }
+    this.applyConfiguration()
+  }
+
+  applyConfiguration() {
+    for (let i = 0; i < this.startConfig.length; i++) {
+      let space = this.board[this.startConfig[i][0]][this.startConfig[i][1]]
+      space.fillToggler(space.cell);
     }
   }
 
   buildRow(rowIdx) {
-    const $row = $('<ul>').addClass('row');
+    // const $row = $('<ul>').addClass('row');
+    const gridRow = []
     for (let colIdx = 0; colIdx < Math.sqrt(this.boardSize); colIdx++) {
-      const $square = $("<li>").addClass('square').attr('data-pos', [rowIdx, colIdx]);
-      $square.on("click", this.fillToggler)
-
-      $row.append($square);
+      let square = new Cell([rowIdx, colIdx]);
+      gridRow.push(square);
+      // $row.append(square.cell);
     }
-    return $row;
+    return gridRow;
   }
 
-  fillToggler(e) {
-
-    $(e.currentTarget).toggleClass('filled');
-  }
-  drawBoard () {
+  renderBoard() {
+      for (let i = 0; i < this.board.length; i++) {
+        const $row = $('<ul>').addClass('row');
+        for (let j = 0; j < this.board.length; j++) {
+          $row.append(this.board[i][j].cell)
+        }
+        this.containerEl.append($row);
+      }
 
   }
 
