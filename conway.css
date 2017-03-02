@@ -1,3 +1,36 @@
 body {
   background-color: #BABABA;
 }
+
+#canvasLife {
+  border: 4px solid black;
+  max-height: 550px;
+  max-width: 520px;
+
+}
+.row {
+  max-width: 520px;
+  max-height: 50px;
+
+}
+.square {
+  cursor: pointer;
+  display: inline-block;
+  border: 1px solid black;
+  background-color: #B45002;
+  min-width: 50px;
+  min-height: 50px;
+}
+.filled {
+  background-color: #7CC432;
+}
+
+.game-title {
+    display: block;
+    font-size: 2em;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+}

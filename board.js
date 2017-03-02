@@ -1,41 +1,58 @@
 class Board {
-  constructor(ctx, size) {
-    this.ctx = ctx;
-    this.grid = this.constructGrid(size);
+  constructor(boardContainer, size) {
+    this.board = $(boardContainer)
+    this.boardSize = size;
+
   }
 
-  constructGrid(size) {
-    let boardGrid = []
-    for (let i = 0; i < size; i++) {
-      let subArr = []
-      for (let j = 0; j < size; j++) {
-        subArr.push(new Tile(i, j, this.ctx));
-      }
-      boardGrid.push(subArr);
+  constructGrid() {
+
+    for (let i = 0; i < Math.sqrt(this.boardSize); i++) {
+      this.board.append(this.buildRow(i));
     }
   }
 
+  buildRow(rowIdx) {
+    const $row = $('<ul>').addClass('row');
+    for (let colIdx = 0; colIdx < Math.sqrt(this.boardSize); colIdx++) {
+      const $square = $("<li>").addClass('square').attr('data-pos', [rowIdx, colIdx]);
+      $square.on("click", this.fillToggler)
+
+      $row.append($square);
+    }
+    return $row;
+  }
+
+  fillToggler(e) {
+
+    $(e.currentTarget).toggleClass('filled');
+  }
   drawBoard () {
-    this.ctx.beginPath();
-    this.ctx.lineWidth='6';
-    this.ctx.strokeStyle='green';
-    this.ctx.rect(0,0, 500, 500);
-    this.ctx.stroke();
 
   }
+
 }
 
-class Tile {
-  constructor(i, j, ctx) {
-    this.ctx = ctx;
-    this.pos = [i, j];
-    this.ctx.beginPath();
-    this.ctx.lineWidth='1';
-    this.ctx.strokeStyle='grey';
-    this.ctx.rect(i*10, j*10, 10, 10)
-    this.ctx.stroke();
-  }
-}
+
+//
+// class Tile {
+//   constructor(i, j, ctx) {
+//
+//     this.filled = this.setInitialFill([i,j])
+//
+//     this.filled ? ctx.fillStyle = '#7CC432' : ctx.fillStyle = '#B45002';
+//     ctx.fill()
+//   }
+//
+//   /// will later be used to preset certain fill configurations, for now
+//   /// everything will start as false
+//   setInitialFill(coords) {
+//     return false;
+//   }
+//   toggleColor(e) {
+//
+//   }
+// }
 
 
 module.exports = Board;

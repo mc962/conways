@@ -78,50 +78,67 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Board = function () {
-  function Board(ctx, size) {
+  function Board(boardContainer, size) {
     _classCallCheck(this, Board);
 
-    this.ctx = ctx;
-    this.grid = this.constructGrid(size);
+    this.board = $(boardContainer);
+    this.boardSize = size;
   }
 
   _createClass(Board, [{
     key: 'constructGrid',
-    value: function constructGrid(size) {
-      var boardGrid = [];
-      for (var i = 0; i < size; i++) {
-        var subArr = [];
-        for (var j = 0; j < size; j++) {
-          subArr.push(new Tile(i, j, this.ctx));
-        }
-        boardGrid.push(subArr);
+    value: function constructGrid() {
+
+      for (var i = 0; i < Math.sqrt(this.boardSize); i++) {
+        this.board.append(this.buildRow(i));
       }
     }
   }, {
-    key: 'drawBoard',
-    value: function drawBoard() {
-      this.ctx.beginPath();
-      this.ctx.lineWidth = '6';
-      this.ctx.strokeStyle = 'green';
-      this.ctx.rect(0, 0, 500, 500);
-      this.ctx.stroke();
+    key: 'buildRow',
+    value: function buildRow(rowIdx) {
+      var $row = $('<ul>').addClass('row');
+      for (var colIdx = 0; colIdx < Math.sqrt(this.boardSize); colIdx++) {
+        var $square = $("<li>").addClass('square').attr('data-pos', [rowIdx, colIdx]);
+        $square.on("click", this.fillToggler);
+
+        $row.append($square);
+      }
+      return $row;
     }
+  }, {
+    key: 'fillToggler',
+    value: function fillToggler(e) {
+
+      $(e.currentTarget).toggleClass('filled');
+    }
+  }, {
+    key: 'drawBoard',
+    value: function drawBoard() {}
   }]);
 
   return Board;
 }();
 
-var Tile = function Tile(i, j, ctx) {
-  _classCallCheck(this, Tile);
+//
+// class Tile {
+//   constructor(i, j, ctx) {
+//
+//     this.filled = this.setInitialFill([i,j])
+//
+//     this.filled ? ctx.fillStyle = '#7CC432' : ctx.fillStyle = '#B45002';
+//     ctx.fill()
+//   }
+//
+//   /// will later be used to preset certain fill configurations, for now
+//   /// everything will start as false
+//   setInitialFill(coords) {
+//     return false;
+//   }
+//   toggleColor(e) {
+//
+//   }
+// }
 
-  this.ctx = ctx;
-  this.pos = [i, j];
-  this.ctx.beginPath();
-  this.ctx.lineWidth = '1';
-  this.ctx.strokeStyle = 'grey';
-  this.ctx.rect(i * 10, j * 10, 10, 10);
-  this.ctx.stroke();
-};
 
 module.exports = Board;
 
@@ -137,28 +154,11 @@ var Board = __webpack_require__(0);
 var init = function init() {
 
   console.log('Init');
-  var canvas = document.getElementById('canvasLife');
-  var context = canvas.getContext('2d');
-  var testBoardSize = 100;
-  var lifeBoard = new Board(context, testBoardSize);
-  lifeBoard.drawBoard();
-  // let centerX = canvas.width / 2;
-  // let centerY = canvas.height / 2;
-  // let radius = 70;
-  // ctx.beginPath();
-  // ctx.arc(centerX, centerY, radius, 0, 2*Math.PI, false)
-  // ctx.fillStyle='green';
-  // ctx.fill()
-  // let stage = new createjs.Stage("canvasLife");
-  // let circle = new createjs.Shape();
-  // let lifeBoard = new Board;
+  var boardContainer = document.getElementById('canvasLife');
 
-  // circle.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 10);
-  // circle.x = 100;
-  // circle.y = 100;
-  // stage.addChild(lifeBoard);
-  // stage.addChild(circle);
-  // stage.update();
+  var testBoardSize = 100;
+  var lifeBoard = new Board(boardContainer, testBoardSize);
+  lifeBoard.constructGrid();
 };
 
 document.addEventListener('DOMContentLoaded', init);
