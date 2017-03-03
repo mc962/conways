@@ -95,12 +95,12 @@ class Movement {
 
   wrapCoord(coord) {
     /////should consider making ivar for 10, the number of squares we can have
-
+    
 
       if (coord < 0) {
-        coord = 10 + coord
-      } else if (coord >= 10) {
-        coord = coord % 10;
+        coord = Math.floor(Math.sqrt(this.gameBoard.boardSize)) + coord
+      } else if (coord >= Math.floor(Math.sqrt(this.gameBoard.boardSize))) {
+        coord = coord % Math.floor(Math.sqrt(this.gameBoard.boardSize));
       }
 
     return coord;

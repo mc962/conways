@@ -8,7 +8,7 @@ const init = () => {
 
   console.log('Init')
 
-  let testBoardSize = 100;
+  let testBoardSize = 1000;
   let boardContainer = document.getElementById('canvasLife');
   let lifeBoard = new Board(boardContainer, testBoardSize);
   const mover = new Movement(lifeBoard);

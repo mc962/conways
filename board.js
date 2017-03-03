@@ -12,7 +12,7 @@ class Board {
     this.board = [];
 
     this.boardSize = size;
-
+    
   }
 
 // getSpace(pos) {
