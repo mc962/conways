@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="./conway.css">
     <link rel="stylesheet" href="./css_reset.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
+    <script src="https://use.fontawesome.com/67a41cd936.js"></script>
     <script src='./bundle.js'></script>
 
     <title>Life</title>
@@ -13,6 +13,22 @@
 
     <body>
         <h1 class='game-title'>Primordial Soup</h1>
-        <div id="canvasLife"></div>
+        <div class='game-container'>
+          <div id="canvasLife"></div>
+          <div class="start-button">
+            <i class="fa fa-play" aria-hidden="true"></i>
+          </div>
+          <div class="pause-button">
+            <i class="fa fa-pause" aria-hidden="true"></i>
+          </div>
+          <div class="clear-button">
+            Reset
+          </div>
+
+          <div class="menu-button">
+
+          </div>
+          <input class="speed-slider" type="range" min="1" max="10" value="1">
+        </div>
     </body>
 </html>

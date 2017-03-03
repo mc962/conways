@@ -4,12 +4,46 @@ const Board = require('./board.js');
 class Movement {
   constructor(gameBoard) {
     this.gameBoard = gameBoard;
-
+    this.isMoving = false;
+    this.timing = 1000;
   }
 
   moveCells() {
+
     console.log("Let's get moving!")
-    window.setInterval(() => {this.checkCells()}, 100);
+    if (!this.isMoving) {
+      this.cycler = window.setInterval(() => {this.checkCells()}, this.timing);
+      this.isMoving = true;
+    }
+  }
+
+  changeSpeed(speedMagnitude) {
+    let speed = 1000-(100*speedMagnitude - 100);
+    this.timing = speed;
+    // look into better way than clearing interval and setting a new one
+    window.clearInterval(this.cycler);
+    this.cycler = window.setInterval(() => {this.checkCells()}, this.timing);
+  }
+
+  freezeCells() {
+    console.log("STOP!!!")
+    if (this.isMoving) {
+      window.clearInterval(this.cycler);
+      this.isMoving = false;
+    }
+
+  }
+
+  clearCells() {
+    console.log('Clear the area!');
+    for (let i = 0; i < this.gameBoard.board.length; i++) {
+      for (let j = 0; j < this.gameBoard.board[i].length; j++) {
+
+        let space = this.gameBoard.board[i][j];
+        space.removeFill(space)
+      }
+    }
+    this.freezeCells();
   }
 
   checkCells() {
@@ -73,7 +107,7 @@ class Movement {
   }
   checkLife(square) {
 
-    console.log('Checking for a pulse...')
+    // console.log('Checking for a pulse...')
 
       if (square.neighbors >= 4 || square.neighbors < 2) {
         this.willDieCells.push(square);
@@ -84,7 +118,7 @@ class Movement {
   makeLife(square) {
 
 
-      console.log('Undergoing mitosis...');
+      // console.log('Undergoing mitosis...');
       this.willLiveCells.push(square)
 
   }
@@ -98,7 +132,7 @@ class Movement {
 
     for (let i = 0; i < this.willDieCells.length; i++) {
       let dieSquare = this.willDieCells[i]
-      dieSquare.removeFill(dieSquare.cell)
+      dieSquare.removeFill(dieSquare)
     }
   }
 }

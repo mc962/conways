@@ -3,7 +3,7 @@ const Cell = require('./cell.js');
 class Board {
   constructor(boardContainer, size) {
     ////////////////////////
-    this.startConfig = [[4, 1], [2, 2], [4, 2], [3, 3], [4, 3]]
+
     // this.startConfig = [[2,2], [2,3], [2,4]]
     // this.startConfig = [[3,3], [2,3], [2,4], [2,5]]
     // this.startConfig = [[3, 3], [3, 4], [2, 5], [4, 4]]
@@ -31,18 +31,31 @@ class Board {
 
       this.board.push(this.buildRow(i))
     }
-    this.applyConfiguration()
   }
 
-  applyConfiguration() {
-    for (let i = 0; i < this.startConfig.length; i++) {
-      let space = this.board[this.startConfig[i][0]][this.startConfig[i][1]]
+
+
+
+  configureSpaces(configChoice) {
+    let directions;
+    switch (configChoice) {
+      case 1:
+        directions = [[4, 1], [2, 2], [4, 2], [3, 3], [4, 3]]
+        break;
+      default:
+
+    }
+    this.applyConfiguration(directions)
+  }
+
+  applyConfiguration(directions) {
+    for (let i = 0; i < directions.length; i++) {
+      let space = this.board[directions[i][0]][directions[i][1]]
       space.addFill(space.cell);
     }
   }
 
   buildRow(rowIdx) {
-
     const gridRow = []
     for (let colIdx = 0; colIdx < Math.sqrt(this.boardSize); colIdx++) {
       let square = new Cell([rowIdx, colIdx]);

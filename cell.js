@@ -5,7 +5,7 @@ class Cell {
     this.cell = this.constructSquare();
     this.fillStatus = false;
     this.neighbors = 0;
-    
+
     this.squareClickHandler = this.squareClickHandler.bind(this);
   }
 
@@ -29,7 +29,8 @@ class Cell {
     this.fillStatus = true;
   }
   removeFill(el) {
-    el.removeClass('filled');
+    
+    el.cell.removeClass('filled');
     this.fillStatus = false;
   }
 
