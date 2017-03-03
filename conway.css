@@ -1,5 +1,16 @@
 body {
   background-color: #BABABA;
+  background-image: url('geothermal.jpeg');
+  background-repeat: no-repeat;
+
+}
+
+.game-container {
+
+  display: flex;
+
+  flex-direction: column;
+  align-items: center;
 }
 
 #canvasLife {
@@ -8,6 +19,8 @@ body {
   max-width: 520px;
 
 }
+
+
 .row {
   max-width: 520px;
   max-height: 50px;
@@ -36,7 +49,7 @@ body {
 }
 
 
-.start-button {
+.cell-status-btn {
   border: 1px solid black;
   background-color: white;
   height: 20px;
@@ -45,20 +58,14 @@ body {
   cursor: pointer;
 }
 
-.pause-button {
-  border: 1px solid black;
-  background-color: white;
-  height: 20px;
-  width: 50px;
-  text-align: center;
-  cursor: pointer;
+.control-btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  max-width: 520px;
 }
-
-.clear-button {
-  border: 1px solid black;
-  background-color: white;
-  height: 20px;
-  width: 50px;
-  text-align: center;
-  cursor: pointer;
+.speed-slider {
+  width: 200px;
 }
