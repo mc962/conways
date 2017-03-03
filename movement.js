@@ -31,13 +31,25 @@ class Movement {
 
   countNeighbors(cell) {
     let neighborCounter = 0;
-    const validDeltas = this.isValidSurrounding(cell.coord);
+      const deltas = [
+                        [1, 0],
+                        [1, 1],
+                        [0, 1],
+                        [-1, 1],
+                        [-1, 0],
+                        [-1, -1],
+                        [0, -1],
+                        [1, -1]
+                      ]
+    
 
-    for (let i = 0; i < validDeltas.length; i++) {
-      let neighborCoordRow = cell.coord[0] + validDeltas[i][0];
-      let neighborCoordColumn = cell.coord[1] + validDeltas[i][1];
+    for (let i = 0; i < deltas.length; i++) {
+      let neighborCoordRow = (cell.coord[0] + deltas[i][0]);
+      let neighborCoordColumn = (cell.coord[1] + deltas[i][1]);
 
-      let neighborCell = this.gameBoard.board[neighborCoordRow][neighborCoordColumn]
+      let wrappedRowCoord = this.wrapCoord(neighborCoordRow);
+      let wrappedColCoord = this.wrapCoord(neighborCoordColumn);
+      let neighborCell = this.gameBoard.board[wrappedRowCoord][wrappedColCoord]
 
 
       if (neighborCell && neighborCell.fillStatus) {
@@ -46,32 +58,19 @@ class Movement {
     }
     cell.neighbors = neighborCounter;
   }
-// check if in bounds of the grid
-  isValidSurrounding(pos) {
 
-    let goodDeltas = []
-    const deltas = [
-                      [1, 0],
-                      [1, 1],
-                      [0, 1],
-                      [-1, 1],
-                      [-1, 0],
-                      [-1, -1],
-                      [0, -1],
-                      [1, -1]
-                   ]
-    for (let i = 0; i < deltas.length; i++) {
+  wrapCoord(coord) {
+    /////should consider making ivar for 10, the number of squares we can have
 
-      let xCoord = pos[0] + deltas[i][0];
-      let yCoord = pos[1] + deltas[i][1]
-      if ((xCoord >= 0 && xCoord < this.gameBoard.board.length) && (yCoord >= 0 && yCoord < this.gameBoard.board.length)) {
-        goodDeltas.push(deltas[i]);
+
+      if (coord < 0) {
+        coord = 10 + coord
+      } else if (coord >= 10) {
+        coord = coord % 10;
       }
-    }
-    return goodDeltas;
+
+    return coord;
   }
-
-
   checkLife(square) {
 
     console.log('Checking for a pulse...')
@@ -91,7 +90,7 @@ class Movement {
   }
 
   updateBoard() {
-    debugger
+
     for (let i = 0; i < this.willLiveCells.length; i++) {
 
       let liveSquare = this.willLiveCells[i]

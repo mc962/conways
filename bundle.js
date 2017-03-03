@@ -77,7 +77,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Cell = __webpack_require__(1);
+var Cell = __webpack_require__(2);
 
 var Board = function () {
   function Board(boardContainer, size) {
@@ -161,6 +161,128 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+var Cell = __webpack_require__(2);
+var Board = __webpack_require__(0);
+
+var Movement = function () {
+  function Movement(gameBoard) {
+    _classCallCheck(this, Movement);
+
+    this.gameBoard = gameBoard;
+  }
+
+  _createClass(Movement, [{
+    key: 'moveCells',
+    value: function moveCells() {
+      var _this = this;
+
+      console.log("Let's get moving!");
+      window.setInterval(function () {
+        _this.checkCells();
+      }, 1000);
+    }
+  }, {
+    key: 'checkCells',
+    value: function checkCells() {
+      this.willDieCells = [];
+      this.willLiveCells = [];
+      for (var i = 0; i < this.gameBoard.board.length; i++) {
+        var boardRow = this.gameBoard.board[i];
+        for (var j = 0; j < boardRow.length; j++) {
+          var currentCell = boardRow[j];
+          this.countNeighbors(currentCell);
+          this.checkLife(currentCell);
+          if (currentCell.neighbors === 3) {
+            this.makeLife(currentCell);
+          }
+        }
+      }
+      this.updateBoard();
+    }
+  }, {
+    key: 'countNeighbors',
+    value: function countNeighbors(cell) {
+      var neighborCounter = 0;
+      var deltas = [[1, 0], [1, 1], [0, 1], [-1, 1], [-1, 0], [-1, -1], [0, -1], [1, -1]];
+
+      for (var i = 0; i < deltas.length; i++) {
+        var neighborCoordRow = cell.coord[0] + deltas[i][0];
+        var neighborCoordColumn = cell.coord[1] + deltas[i][1];
+
+        var wrappedRowCoord = this.wrapCoord(neighborCoordRow);
+        var wrappedColCoord = this.wrapCoord(neighborCoordColumn);
+        var neighborCell = this.gameBoard.board[wrappedRowCoord][wrappedColCoord];
+
+        if (neighborCell && neighborCell.fillStatus) {
+          neighborCounter += 1;
+        }
+      }
+      cell.neighbors = neighborCounter;
+    }
+  }, {
+    key: 'wrapCoord',
+    value: function wrapCoord(coord) {
+      /////should consider making ivar for 10, the number of squares we can have
+
+
+      if (coord < 0) {
+        coord = 10 + coord;
+      } else if (coord >= 10) {
+        coord = coord % 10;
+      }
+
+      return coord;
+    }
+  }, {
+    key: 'checkLife',
+    value: function checkLife(square) {
+
+      console.log('Checking for a pulse...');
+
+      if (square.neighbors >= 4 || square.neighbors < 2) {
+        this.willDieCells.push(square);
+      }
+    }
+  }, {
+    key: 'makeLife',
+    value: function makeLife(square) {
+
+      console.log('Undergoing mitosis...');
+      this.willLiveCells.push(square);
+    }
+  }, {
+    key: 'updateBoard',
+    value: function updateBoard() {
+
+      for (var i = 0; i < this.willLiveCells.length; i++) {
+
+        var liveSquare = this.willLiveCells[i];
+        liveSquare.addFill(liveSquare.cell);
+      }
+
+      for (var _i = 0; _i < this.willDieCells.length; _i++) {
+        var dieSquare = this.willDieCells[_i];
+        dieSquare.removeFill(dieSquare.cell);
+      }
+    }
+  }]);
+
+  return Movement;
+}();
+
+module.exports = Movement;
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 var Cell = function () {
   function Cell(dataPoints) {
     _classCallCheck(this, Cell);
@@ -169,7 +291,7 @@ var Cell = function () {
     this.cell = this.constructSquare();
     this.fillStatus = false;
     this.neighbors = 0;
-    // this.fillToggler = this.fillToggler.bind(this);
+
     this.squareClickHandler = this.squareClickHandler.bind(this);
   }
 
@@ -212,130 +334,6 @@ var Cell = function () {
 module.exports = Cell;
 
 /***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Cell = __webpack_require__(1);
-var Board = __webpack_require__(0);
-
-var Movement = function () {
-  function Movement(gameBoard) {
-    _classCallCheck(this, Movement);
-
-    this.gameBoard = gameBoard;
-  }
-
-  _createClass(Movement, [{
-    key: 'moveCells',
-    value: function moveCells() {
-      var _this = this;
-
-      console.log("Let's get moving!");
-      window.setInterval(function () {
-        _this.checkCells();
-      }, 1000);
-    }
-  }, {
-    key: 'checkCells',
-    value: function checkCells() {
-      this.willDieCells = [];
-      this.willLiveCells = [];
-      for (var i = 0; i < this.gameBoard.board.length; i++) {
-        var boardRow = this.gameBoard.board[i];
-        for (var j = 0; j < boardRow.length; j++) {
-          var currentCell = boardRow[j];
-          this.countNeighbors(currentCell);
-          this.checkLife(currentCell);
-          if (currentCell.neighbors === 3) {
-            this.makeLife(currentCell);
-          }
-        }
-      }
-      this.updateBoard();
-    }
-  }, {
-    key: 'countNeighbors',
-    value: function countNeighbors(cell) {
-      var neighborCounter = 0;
-      var validDeltas = this.isValidSurrounding(cell.coord);
-
-      for (var i = 0; i < validDeltas.length; i++) {
-        var neighborCoordRow = cell.coord[0] + validDeltas[i][0];
-        var neighborCoordColumn = cell.coord[1] + validDeltas[i][1];
-
-        var neighborCell = this.gameBoard.board[neighborCoordRow][neighborCoordColumn];
-
-        if (neighborCell && neighborCell.fillStatus) {
-          neighborCounter += 1;
-        }
-      }
-      cell.neighbors = neighborCounter;
-    }
-    // check if in bounds of the grid
-
-  }, {
-    key: 'isValidSurrounding',
-    value: function isValidSurrounding(pos) {
-
-      var goodDeltas = [];
-      var deltas = [[1, 0], [1, 1], [0, 1], [-1, 1], [-1, 0], [-1, -1], [0, -1], [1, -1]];
-      for (var i = 0; i < deltas.length; i++) {
-
-        var xCoord = pos[0] + deltas[i][0];
-        var yCoord = pos[1] + deltas[i][1];
-        if (xCoord >= 0 && xCoord < this.gameBoard.board.length && yCoord >= 0 && yCoord < this.gameBoard.board.length) {
-          goodDeltas.push(deltas[i]);
-        }
-      }
-      return goodDeltas;
-    }
-  }, {
-    key: 'checkLife',
-    value: function checkLife(square) {
-
-      console.log('Checking for a pulse...');
-
-      if (square.neighbors >= 4 || square.neighbors < 2) {
-        this.willDieCells.push(square);
-      }
-    }
-  }, {
-    key: 'makeLife',
-    value: function makeLife(square) {
-
-      console.log('Undergoing mitosis...');
-      this.willLiveCells.push(square);
-    }
-  }, {
-    key: 'updateBoard',
-    value: function updateBoard() {
-      debugger;
-      for (var i = 0; i < this.willLiveCells.length; i++) {
-
-        var liveSquare = this.willLiveCells[i];
-        liveSquare.addFill(liveSquare.cell);
-      }
-
-      for (var _i = 0; _i < this.willDieCells.length; _i++) {
-        var dieSquare = this.willDieCells[_i];
-        dieSquare.removeFill(dieSquare.cell);
-      }
-    }
-  }]);
-
-  return Movement;
-}();
-
-module.exports = Movement;
-
-/***/ }),
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -343,7 +341,7 @@ module.exports = Movement;
 
 
 var Board = __webpack_require__(0);
-var Movement = __webpack_require__(2);
+var Movement = __webpack_require__(1);
 
 var init = function init() {
 

@@ -5,7 +5,7 @@ class Cell {
     this.cell = this.constructSquare();
     this.fillStatus = false;
     this.neighbors = 0;
-    // this.fillToggler = this.fillToggler.bind(this);
+    
     this.squareClickHandler = this.squareClickHandler.bind(this);
   }
 
@@ -21,7 +21,7 @@ class Cell {
 
     clickedEl.toggleClass('filled');
     this.fillStatus = !this.fillStatus
-    
+
   }
 
   addFill(el) {
