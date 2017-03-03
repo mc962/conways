@@ -84,8 +84,10 @@ var Board = function () {
     _classCallCheck(this, Board);
 
     ////////////////////////
-    this.startConfig = [[4, 2], [2, 3], [4, 3], [3, 4], [4, 4]];
+    this.startConfig = [[4, 1], [2, 2], [4, 2], [3, 3], [4, 3]];
     // this.startConfig = [[2,2], [2,3], [2,4]]
+    // this.startConfig = [[3,3], [2,3], [2,4], [2,5]]
+    // this.startConfig = [[3, 3], [3, 4], [2, 5], [4, 4]]
     ////////////////////////
     this.containerEl = $(boardContainer);
     this.board = [];
@@ -240,7 +242,7 @@ var Movement = function () {
       console.log("Let's get moving!");
       window.setInterval(function () {
         _this.checkCells();
-      }, 1000);
+      }, 100);
     }
   }, {
     key: 'checkCells',
@@ -316,6 +318,7 @@ var Movement = function () {
   }, {
     key: 'updateBoard',
     value: function updateBoard() {
+      // gets stuck in a 2x2 at the end of the board
       debugger;
       for (var i = 0; i < this.willLiveCells.length; i++) {
 

@@ -3,8 +3,10 @@ const Cell = require('./cell.js');
 class Board {
   constructor(boardContainer, size) {
     ////////////////////////
-    this.startConfig = [[4, 2], [2, 3], [4, 3], [3, 4], [4, 4]]
+    this.startConfig = [[4, 1], [2, 2], [4, 2], [3, 3], [4, 3]]
     // this.startConfig = [[2,2], [2,3], [2,4]]
+    // this.startConfig = [[3,3], [2,3], [2,4], [2,5]]
+    // this.startConfig = [[3, 3], [3, 4], [2, 5], [4, 4]]
     ////////////////////////
     this.containerEl = $(boardContainer);
     this.board = [];

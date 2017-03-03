@@ -9,7 +9,7 @@ class Movement {
 
   moveCells() {
     console.log("Let's get moving!")
-    window.setInterval(() => {this.checkCells()}, 1000);
+    window.setInterval(() => {this.checkCells()}, 100);
   }
 
   checkCells() {
@@ -91,6 +91,7 @@ class Movement {
   }
 
   updateBoard() {
+    // gets stuck in a 2x2 at the end of the board
     debugger
     for (let i = 0; i < this.willLiveCells.length; i++) {
 
