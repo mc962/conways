@@ -1,18 +1,14 @@
 const Cell = require('./cell.js');
-
+const Shapes = require('./shapes.js')
 class Board {
   constructor(boardContainer, size) {
-    ////////////////////////
-
-    // this.startConfig = [[2,2], [2,3], [2,4]]
-    // this.startConfig = [[3,3], [2,3], [2,4], [2,5]]
-    // this.startConfig = [[3, 3], [3, 4], [2, 5], [4, 4]]
-    ////////////////////////
     this.containerEl = $(boardContainer);
     this.board = [];
 
     this.boardSize = size;
-    
+    let midPos = [Math.floor(Math.sqrt(this.boardSize)/2), Math.floor(Math.sqrt(this.boardSize)/2)]
+    this.configuration = new Shapes(midPos)
+
   }
 
 // getSpace(pos) {
@@ -33,20 +29,60 @@ class Board {
     }
   }
 
-
-
-
-  configureSpaces(configChoice) {
+  configureSpaces(configChoice = 'cleared') {
+    this.clearBoard();
     let directions;
+    // start in center position
+
     switch (configChoice) {
-      case 1:
-        directions = [[4, 1], [2, 2], [4, 2], [3, 3], [4, 3]]
+      case 'cleared':
+        directions = [];
         break;
+
+      case 'glider':
+
+        directions = this.configuration.seeds['GLIDER']
+        break;
+
+      case 'tetromino':
+        if (this.boardSize < 85) {
+          alert('Board too small for this configuration.')
+        } else {
+          directions = this.configuration.seeds['TETROMINO']
+        }
+        break;
+
+      case 'gosper-glider':
+        if (this.boardSize < 1600) {
+          alert('Board too small for this configuration.')
+        } else {
+          directions = this.configuration.seeds['GOSPERGLIDER']
+        }
+        break;
+
+        case 'sunshine':
+        if (this.boardSize < 260) {
+          alert('Board too small for this configuration.')
+        } else {
+          directions = this.configuration.seeds['SUNSHINE']
+        }
+          break;
+
+        case 'supernova':
+        if (this.boardSize < 260) {
+          alert('Board too small for this configuration.');
+        } else {
+          directions = this.configuration.seeds['SUPERNOVA'];
+        }
+          break;
+
       default:
 
     }
+
     this.applyConfiguration(directions)
   }
+
 
   applyConfiguration(directions) {
     for (let i = 0; i < directions.length; i++) {
@@ -65,10 +101,20 @@ class Board {
     return gridRow;
   }
 
+  clearBoard() {
+    for (let i = 0; i < this.board.length; i++) {
+      for (let j = 0; j < this.board.length; j++) {
+
+        let space = this.board[i][j];
+        space.removeFill(space)
+      }
+    }
+  }
+
   renderBoard() {
       for (let i = 0; i < this.board.length; i++) {
         const $row = $('<ul>').addClass('row');
-        for (let j = 0; j < this.board.length; j++) {
+        for (let j = 0; j < this.board[i].length; j++) {
           $row.append(this.board[i][j].cell)
         }
         this.containerEl.append($row);

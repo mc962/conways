@@ -15,8 +15,7 @@ body {
 
 #canvasLife {
   border: 4px solid black;
-  /*max-height: 550px;
-  max-width: 520px;*/
+
   display: flex;
   flex-direction: column;
   width: 500px;
@@ -25,9 +24,6 @@ body {
 
 
 .row {
-  /*max-width: 520px;
-  max-height: 50px;
-  */
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -41,8 +37,6 @@ body {
   background-color: #B45002;
   height: 100%;
   width: 10%;
-  /*min-width: 50px;
-  min-height: 50px;*/
 }
 .filled {
   background-color: #7CC432;
@@ -52,18 +46,20 @@ body {
     display: block;
     font-size: 2em;
     margin-top: 0.67em;
-    margin-bottom: 0.67em;
+    margin-bottom: 0.3em;
     margin-left: 0;
     margin-right: 0;
     font-weight: bold;
+    font-family: 'Sigmar One', cursive;
 }
 
 
 .cell-status-btn {
   border: 1px solid black;
   background-color: white;
-  height: 20px;
-  width: 50px;
+  height: 50px;
+  width: 100px;
+  border-radius: 4px;
   text-align: center;
   cursor: pointer;
 }
@@ -71,11 +67,86 @@ body {
 .control-btns {
   display: flex;
   flex-direction: row;
+  width: 500px;
   justify-content: space-between;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  max-width: 520px;
+  font-family: 'Amiko', sans-serif;
 }
+
+.cell-status-btn {
+  line-height: 3.5;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  margin-left: 5px;
+  background-color: #89E0E0;
+}
+
+/* speed slider */
+
+.slider-container {
+  background-color: #31A850;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+
+}
+
+.speed-labels {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.range-inputs {
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+  /*border: 1px solid black;*/
+  width: 90%;
+  margin: 0 auto;
+}
+
 .speed-slider {
-  width: 200px;
+    margin-right: 4px;
+
+}
+
+.speed-slider-value {
+  max-width: 20px;
+  margin-left: 4px;
+  margin-right: 4px;
+  border-radius: 4px;
+  background-color: inherit;
+  border: none;
+  text-align: center;
+  color: black;
+}
+
+.speed-slider-title {
+  text-align: center;
+  padding: 5px;
+}
+
+.menu-btn {
+  background-color: white;
+  width: 150px;
+  align-self: center;
+  font-family: 'Amiko', sans-serif;
+  background-color: #E48E76
+}
+
+.movement-btns {
+  display: flex;
+  flex-direction: row;
+}
+.effect-btns {
+  display: flex;
+  flex-direction: column;
+}
+
+.active-button {
+
 }

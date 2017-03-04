@@ -9,24 +9,29 @@ class Movement {
   }
 
   moveCells() {
-
-    console.log("Let's get moving!")
     if (!this.isMoving) {
       this.cycler = window.setInterval(() => {this.checkCells()}, this.timing);
       this.isMoving = true;
     }
   }
 
-  changeSpeed(speedMagnitude) {
+  changeSpeed(speedMagnitude, sliderLabel) {
     let speed = 1000-(100*speedMagnitude - 100);
     this.timing = speed;
-    // look into better way than clearing interval and setting a new one
+    if (this.isMoving) {
+      // look into better way than clearing interval and setting a new one
+      window.clearInterval(this.cycler);
+      this.cycler = window.setInterval(() => {this.checkCells()}, this.timing);
+    }
+    sliderLabel.value = speedMagnitude;
+  }
+
+  changeShape(newShape) {
     window.clearInterval(this.cycler);
-    this.cycler = window.setInterval(() => {this.checkCells()}, this.timing);
+    this.gameBoard.configureSpaces(newShape);
   }
 
   freezeCells() {
-    console.log("STOP!!!")
     if (this.isMoving) {
       window.clearInterval(this.cycler);
       this.isMoving = false;
@@ -35,14 +40,7 @@ class Movement {
   }
 
   clearCells() {
-    console.log('Clear the area!');
-    for (let i = 0; i < this.gameBoard.board.length; i++) {
-      for (let j = 0; j < this.gameBoard.board[i].length; j++) {
-
-        let space = this.gameBoard.board[i][j];
-        space.removeFill(space)
-      }
-    }
+    this.gameBoard.clearBoard()
     this.freezeCells();
   }
 
@@ -94,8 +92,7 @@ class Movement {
   }
 
   wrapCoord(coord) {
-    /////should consider making ivar for 10, the number of squares we can have
-    
+
 
       if (coord < 0) {
         coord = Math.floor(Math.sqrt(this.gameBoard.boardSize)) + coord
@@ -107,8 +104,6 @@ class Movement {
   }
   checkLife(square) {
 
-    // console.log('Checking for a pulse...')
-
       if (square.neighbors >= 4 || square.neighbors < 2) {
         this.willDieCells.push(square);
 
@@ -116,9 +111,6 @@ class Movement {
   }
 
   makeLife(square) {
-
-
-      // console.log('Undergoing mitosis...');
       this.willLiveCells.push(square)
 
   }
