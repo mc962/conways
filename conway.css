@@ -130,13 +130,6 @@ body {
   padding: 5px;
 }
 
-.menu-btn {
-  background-color: white;
-  width: 150px;
-  align-self: center;
-  font-family: 'Amiko', sans-serif;
-  background-color: #E48E76
-}
 
 .movement-btns {
   display: flex;
@@ -148,5 +141,31 @@ body {
 }
 
 .active-button {
+  border: 2px solid #aef760;
+}
 
+.board-config {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+  border-radius: 4px;
+}
+
+.board-size {
+  margin-top: 5px;
+  width: 147px;
+  text-indent: 5px;
+  border-radius: 4px;
+  cursor: default;
+}
+
+.menu-btn {
+  background-color: white;
+  width: 150px;
+  /*align-self: center;*/
+  font-family: 'Amiko', sans-serif;
+  background-color: #E48E76;
+  border-radius: 4px;
+  cursor: default;
 }

@@ -6,13 +6,22 @@ class Movement {
     this.gameBoard = gameBoard;
     this.isMoving = false;
     this.timing = 1000;
+    this.startButton = ''
+    this.pauseButton = ''
   }
 
   moveCells() {
     if (!this.isMoving) {
       this.cycler = window.setInterval(() => {this.checkCells()}, this.timing);
       this.isMoving = true;
+      this.toggleActiveButton()
     }
+  }
+
+  toggleActiveButton() {
+
+    $(this.startButton).toggleClass('active-button')
+    $(this.pauseButton).toggleClass('active-button')
   }
 
   changeSpeed(speedMagnitude, sliderLabel) {
@@ -27,6 +36,11 @@ class Movement {
   }
 
   changeShape(newShape) {
+    if (this.isMoving) {
+
+      this.freezeCells();
+    }
+
     window.clearInterval(this.cycler);
     this.gameBoard.configureSpaces(newShape);
   }
@@ -35,13 +49,16 @@ class Movement {
     if (this.isMoving) {
       window.clearInterval(this.cycler);
       this.isMoving = false;
+      this.toggleActiveButton()
     }
 
   }
 
   clearCells() {
     this.gameBoard.clearBoard()
-    this.freezeCells();
+    if (this.isMoving) {
+      this.freezeCells();      
+    }
   }
 
   checkCells() {
@@ -127,6 +144,7 @@ class Movement {
       dieSquare.removeFill(dieSquare)
     }
   }
+
 }
 
 module.exports = Movement

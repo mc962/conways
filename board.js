@@ -40,13 +40,18 @@ class Board {
         break;
 
       case 'glider':
-
-        directions = this.configuration.seeds['GLIDER']
+        if (this.boardSize < 10) {
+          alert('Board too small for this configuration. Please select a different shape or board size.');
+          directions = [];
+        } else {
+          directions = this.configuration.seeds['GLIDER']
+        }
         break;
 
       case 'tetromino':
         if (this.boardSize < 85) {
-          alert('Board too small for this configuration.')
+          alert('Board too small for this configuration. Please select a different shape or board size.');
+          directions = [];
         } else {
           directions = this.configuration.seeds['TETROMINO']
         }
@@ -54,7 +59,8 @@ class Board {
 
       case 'gosper-glider':
         if (this.boardSize < 1600) {
-          alert('Board too small for this configuration.')
+          alert('Board too small for this configuration. Please select a different shape or board size.');
+          directions = [];
         } else {
           directions = this.configuration.seeds['GOSPERGLIDER']
         }
@@ -62,7 +68,8 @@ class Board {
 
         case 'sunshine':
         if (this.boardSize < 260) {
-          alert('Board too small for this configuration.')
+          alert('Board too small for this configuration. Please select a different shape or board size.');
+          directions = [];
         } else {
           directions = this.configuration.seeds['SUNSHINE']
         }
@@ -70,7 +77,8 @@ class Board {
 
         case 'supernova':
         if (this.boardSize < 260) {
-          alert('Board too small for this configuration.');
+          alert('Board too small for this configuration. Please select a different shape or board size.');
+          directions = [];
         } else {
           directions = this.configuration.seeds['SUPERNOVA'];
         }
