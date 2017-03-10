@@ -23,12 +23,66 @@
         <div class="x-button">
           x
         </div>
-        <h1>Instructions</h1>
-        <ul>
-          <li></li>
-          <li></li>
-          <li></li>
-        </ul>
+        <h1 class='instructions-heading'>Instructions</h1>
+        <div class="petri-dish">
+          <img src="assets/images/cartoon-germ-virus.jpg" alt="germ" class='cell-picture' id='cell1'>
+        </div>
+
+        <header class='instructions-description'>
+          <p>
+            Primordial soup is a simulation of cellular automata, a simple model
+            of interaction between cells.
+          </p>
+          <p>
+            The rules are simple.
+          </p>
+        </header>
+        <div class="rules-container">
+          <label class="instructions-label" for="rules">Rules</label>
+          <ol id="rules" class='rules-list'>
+            <li class='rules-item'>Live cells are represented by green squares,
+              while dead cells are represented by orange cells.</li>
+              <li class='rules-item'>A living cell with less than 2 neighbors dies from 'loneliness'</li>
+              <li class='rules-item'>A living cell with 4 or more neighbors will die from overpopulation</li>
+              <li class='rules-item'>A living cell with 2 or 3 neighbors will remain living.</li>
+              <li class='rules-item'>A 'dead' cell space with exactly 3 neighbors will become alive on the next turn</li>
+              <li class='rules-item'>In this version the board is infinitely wrapped to itself,
+                a cell that goes off the board on the right will reappear on the left
+              </li>
+            </ol>
+        </div>
+
+        <div class="controls-container">
+          <label class="instructions-label" for="controls">Controls</label>
+          <ul class='controls-list'>
+            <li class='controls-item'>
+              <i class="fa fa-play" aria-hidden="true"></i>
+              will resume the game from a paused state.
+            </li>
+            <li class='controls-item'>
+              <i class="fa fa-pause" aria-hidden="true"></i>
+              will stop the game from a moving state.
+            </li>
+            <li class='controls-item'>Reset will reset the board to the shape used at the beginning of the round</li>
+            <li class='controls-item'>The slider can be used to control the speed of the game. As the speed increases,
+              the interval between each game tick and cell live/die cycle becomes shorter.
+            </li>
+            <li class='controls-item'>
+              The size menu can be used to select a board size from a list of preconfigured board sizes.
+              It is recommended that players on lower-end hardware (such as mobile phones) should not go above a
+              5000 square board size.
+            </li>
+            <li class='controls-item'>
+              The shapes menu can be used to select from a list of preconfigured shapes.
+              If the current board size is too small for the selected shape, it will <strong>automatically
+                resize the board</strong> to an acceptable size. A shape may still be manually be drawn by selecting and deselecting
+                squares with the mouse, and a blank board has been provided through the 'Cleared' option.
+              </li>
+            </ul>
+        </div>
+        <footer class='lucky-message'>
+          Enjoy, and good luck! Make some fun shapes!
+        </footer>
         <div class="close-button">
           Close
         </div>
@@ -57,29 +111,48 @@
                 </div>
               </div>
               <div class="board-config">
+                <table class='config-table'>
+                  <tr>
+                    <td class='config-table-data'>
+                      <label class="shapes-label" for="shapes-menu">Shapes</label>
+                    </td>
+                    <td class='config-table-data'>
+                      <div class="shapes-menu">
+                        <select id='shapes-menu' class="menu-btn">
+                          <option value="cleared">Cleared</option>
+                          <option value="tetromino">Tetromino</option>
+                          <option value="glider">Glider</option>
+                          <option value="gosper-glider">Gosper Glider</option>
+                          <option value="sunshine" selected>Sunshine</option>
+                          <option value="supernova">Supernova</option>
+                        </select>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class='config-table-data'>
+                      <label class="sizes-label" for="size-menu">Board Sizes</label>
+                    </td>
+                    <td class='config-table-data'>
+                      <div class="sizes-menu">
 
-                <select class="menu-btn">
-                  <option value="cleared">Cleared</option>
-                  <option value="tetromino">Tetromino</option>
-                  <option value="glider">Glider</option>
-                  <option value="gosper-glider">Gosper Glider</option>
-                  <option value="sunshine" selected>Sunshine</option>
-                  <option value="supernova">Supernova</option>
-                </select>
+                        <select id='size-menu' class="board-size" name="board-size">
+                          <option value="100">100</option>
+                          <option value="300">300</option>
+                          <option value="1000" selected>1000</option>
+                          <option value="3000">3000</option>
+                          <option value="5000">5000</option>
+                          <option value="5000">10000</option>
+                          <option value="5000">20000</option>
+                        </select>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
 
 
-                <select class="board-size" name="board-size">
-                  <option value="100">100</option>
-                  <option value="300">300</option>
-                  <option value="1000" selected>1000</option>
-                  <option value="3000">3000</option>
-                  <option value="5000">5000</option>
-                  <option value="5000">10000</option>
-                  <option value="5000">20000</option>
-                </select>
-
-                <!-- <input type="number" min="10" max="20000" name="board-size" class="board-size" value="100"> -->
               </div>
+
             </div>
 
 
@@ -99,16 +172,23 @@
         </div>
 
         <div class="credits">
-          <div class="github-link credit-link">
-            <i class="fa fa-github-square credit-icon" aria-hidden="true"></i><a href="https://github.com/mc962/conways">GitHub</a>
-          </div>
-          <div class="linkedin-link">
-            <i class="fa fa-linkedin-square credit-icon" aria-hidden="true"></i><a href="https://www.linkedin.com/in/michaelchilton1/">LinkedIn</a>
-          </div>
-          <div class="portfolio-link credit-link">
-            <i class="fa fa-folder credit-icon" aria-hidden="true"></i><a href="https://mc962.github.io/">Portfolio</a>
+          <h2 class='author-heading'>Built by <strong>Michael Chilton</strong></h2>
+          <div class="credits-info">
+
+            <ul class="links-list">
+              <li class="github-link credit-link">
+                <i class="fa fa-github-square credit-icon" aria-hidden="true"></i><a href="https://github.com/mc962/conways">GitHub</a>
+              </li>
+              <li class="linkedin-link">
+                <i class="fa fa-linkedin-square credit-icon" aria-hidden="true"></i><a href="https://www.linkedin.com/in/michaelchilton1/">LinkedIn</a>
+              </li>
+              <li class="portfolio-link credit-link">
+                <i class="fa fa-folder credit-icon" aria-hidden="true"></i><a href="https://mc962.github.io/">Portfolio</a>
+              </li>
+            </ul>
           </div>
         </div>
+
       </div>
     </body>
 </html>

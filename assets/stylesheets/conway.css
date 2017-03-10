@@ -85,26 +85,32 @@ body {
 
 .game-title {
     display: block;
-    font-size: 2em;
+    font-size: 3em;
     margin-top: 0.67em;
     margin-bottom: 0.3em;
     margin-left: 0;
     margin-right: 0;
     font-weight: bold;
     font-family: 'Sigmar One', cursive;
+    color: #99C7F6;
+    text-shadow: -3px 0 #3342e0, 0 3px #3342e0,
+      3px 0 #3342e0, 0 -3px #3342e0
 }
 
 
 .cell-status-btn {
+  cursor: pointer;
   border: 1px solid black;
-  background-color: white;
   height: 50px;
   width: 100px;
   border-radius: 4px;
   text-align: center;
-  cursor: pointer;
+  line-height: 3.5;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 5px;
+  background-color: #89E0E0;
 }
-
 .control-btns {
   display: flex;
   flex-direction: row;
@@ -113,13 +119,6 @@ body {
   font-family: 'Amiko', sans-serif;
 }
 
-.cell-status-btn {
-  line-height: 3.5;
-  margin-top: 10px;
-  margin-bottom: 20px;
-  margin-left: 5px;
-  background-color: #89E0E0;
-}
 
 /* speed slider */
 
@@ -182,7 +181,8 @@ body {
 }
 
 .active-button {
-  border: 2px solid #aef760;
+  border: 2px solid #f23a3a;
+
 }
 
 .board-config {
@@ -193,13 +193,28 @@ body {
   border-radius: 4px;
 }
 
+.config-table-data {
+  padding: 5px;
+}
+
+.shapes-label {
+  color: #f93600
+}
+
+.sizes-label {
+  color: #f2ff49
+}
+
 .board-size {
   margin-top: 5px;
-  width: 147px;
+  width: 150px;
   text-indent: 5px;
   border-radius: 4px;
   cursor: default;
+  background-color: #f9f57c;
 }
+
+
 
 .menu-btn {
   background-color: white;
@@ -211,23 +226,6 @@ body {
   cursor: default;
 }
 
-.credits {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  margin-top: auto;
-  margin-bottom: auto;
-  margin-left: 10%;
-  border: 1px solid black;
-  background-color: #CCEBE6;
-  border-radius: 4px;
-
-}
-
-.credit-link {
-  padding: 15px;
-}
 
 .project-container {
   display: flex;
@@ -238,16 +236,6 @@ body {
 /**/
 
 
-.instructions-display {
-  height: 300px;
-  width: 300px;
-  background-color: white;
-  z-index: 50;
-  position: fixed;
-  top: 30%;
-  left: 43%;
-  border-radius: 4px;
-}
 
 .transparent-popover {
   height: 100%;
@@ -270,7 +258,7 @@ body {
 }
 
 .popover-launcher {
-  background-color: white;
+  background-color: #b3f9c7;
   cursor: pointer;
   width: 150px;
   height: 25px;
@@ -280,7 +268,8 @@ body {
   text-align: center;
   padding: 5px;
   margin-right: 10%;
-  border: 1px solid black;
+  border: 4px solid #3DBD94;
+  font-family: Amiko;
 }
 
 .github-link {
@@ -289,9 +278,153 @@ body {
 
 .x-button {
   cursor: pointer;
-
+  height: 25px;
+  width: 25px;
+  border: 1px solid grey;
+  text-align: center;
+  line-height: 25px;
+  border-radius: 50px;
+  align-self: flex-end;
+  /*margin-top: 15px;
+  margin-right: 15px;*/
 }
 
 .close-button {
   cursor: pointer;
+  text-align: center;
+  line-height: 30px;
+  width: 100px;
+  height: 30px;
+  border-radius: 15px;
+  border: 1px solid black;
+}
+
+.controls-item {
+  /*overflow-wrap: break-word;*/
+}
+.instructions-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  z-index: 50;
+  position: fixed;
+  top: 2%;
+  /*left: 43%;*/
+  border-radius: 4px;
+  padding: 15px;
+  width: 65%;
+  height: 92%;
+  font-family: Amiko;
+}
+
+.instructions-description {
+    margin-bottom: 8px;
+    text-align: center;
+    width: 75%;
+}
+
+
+.rules-container {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  width: 70%;
+  margin-bottom: 10px;
+}
+
+.rules-list {
+  list-style-type: decimal;
+}
+
+.controls-list {
+  list-style-type: disc;
+}
+.controls-container {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  width: 70%;
+  margin-bottom: 10px;
+}
+
+.lucky-message {
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+.instructions-heading {
+  display: block;
+  font-size: 2em;
+  /*margin-top: 0.2em;*/
+  margin-bottom: 0.1em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+}
+
+.instructions-label {
+  text-align: center;
+  font-weight: 700;
+}
+
+.petri-dish {
+  align-self: flex-start;
+  top: 7%;
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.cell-picture {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+}
+
+.credits {
+
+
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 10%;
+  background-color: #0cb24e;
+  border-radius: 4px;
+
+  border: 4px solid #007BA9;
+  font-family: 'Amiko';
+}
+
+.credits-info {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.icon-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.links-list {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.credit-icon {
+  margin-right: 12px;
+}
+
+.credit-link {
+  padding: 15px;
+}
+
+.linkedin-link {
+  text-indent: 7.5px;
+}
+
+.author-heading {
+  margin-bottom: 7px;
+  padding: 10px;
 }
