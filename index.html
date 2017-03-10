@@ -13,6 +13,31 @@
   </head>
 
     <body>
+      <div class="project-container">
+
+      <div class="popover hidden-popover">
+
+      </div>
+
+      <div class='instructions hidden-instructions'>
+        <div class="x-button">
+          x
+        </div>
+        <h1>Instructions</h1>
+        <ul>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+        <div class="close-button">
+          Close
+        </div>
+      </div>
+
+      <div class="popover-launcher">
+        Instructions
+      </div>
+
         <div class='game-container'>
           <h1 class='game-title'>Primordial Soup</h1>
           <div id="canvasLife"></div>
@@ -28,20 +53,32 @@
                   <i class="fa fa-pause" aria-hidden="true"></i>
                 </div>
                 <div class="clear-btn cell-status-btn">
-                  Clear
+                  Reset
                 </div>
               </div>
               <div class="board-config">
 
                 <select class="menu-btn">
-                  <option value="cleared" selected>Cleared</option>
+                  <option value="cleared">Cleared</option>
                   <option value="tetromino">Tetromino</option>
                   <option value="glider">Glider</option>
                   <option value="gosper-glider">Gosper Glider</option>
-                  <option value="sunshine">Sunshine</option>
+                  <option value="sunshine" selected>Sunshine</option>
                   <option value="supernova">Supernova</option>
                 </select>
-                <input type="number" min="10" max="20000" name="board-size" class="board-size" value="100">
+
+
+                <select class="board-size" name="board-size">
+                  <option value="100">100</option>
+                  <option value="300">300</option>
+                  <option value="1000" selected>1000</option>
+                  <option value="3000">3000</option>
+                  <option value="5000">5000</option>
+                  <option value="5000">10000</option>
+                  <option value="5000">20000</option>
+                </select>
+
+                <!-- <input type="number" min="10" max="20000" name="board-size" class="board-size" value="100"> -->
               </div>
             </div>
 
@@ -59,8 +96,19 @@
             </div>
           </div>
 
-
-
         </div>
+
+        <div class="credits">
+          <div class="github-link credit-link">
+            <i class="fa fa-github-square credit-icon" aria-hidden="true"></i><a href="https://github.com/mc962/conways">GitHub</a>
+          </div>
+          <div class="linkedin-link">
+            <i class="fa fa-linkedin-square credit-icon" aria-hidden="true"></i><a href="https://www.linkedin.com/in/michaelchilton1/">LinkedIn</a>
+          </div>
+          <div class="portfolio-link credit-link">
+            <i class="fa fa-folder credit-icon" aria-hidden="true"></i><a href="https://mc962.github.io/">Portfolio</a>
+          </div>
+        </div>
+      </div>
     </body>
 </html>

@@ -51,6 +51,7 @@ body {
 
   flex-direction: column;
   align-items: center;
+
 }
 
 #canvasLife {
@@ -208,4 +209,89 @@ body {
   background-color: #E48E76;
   border-radius: 4px;
   cursor: default;
+}
+
+.credits {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 10%;
+  border: 1px solid black;
+  background-color: #CCEBE6;
+  border-radius: 4px;
+
+}
+
+.credit-link {
+  padding: 15px;
+}
+
+.project-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+}
+/**/
+
+
+.instructions-display {
+  height: 300px;
+  width: 300px;
+  background-color: white;
+  z-index: 50;
+  position: fixed;
+  top: 30%;
+  left: 43%;
+  border-radius: 4px;
+}
+
+.transparent-popover {
+  height: 100%;
+  width: 100%;
+  /*display: transparent;*/
+  background-color: black;
+  opacity: .5;
+  top: 0;
+  left: 0;
+  position: fixed;
+  z-index: 40;
+}
+
+.hidden-popover {
+  display: none;
+}
+
+.hidden-instructions {
+  display: none;
+}
+
+.popover-launcher {
+  background-color: white;
+  cursor: pointer;
+  width: 150px;
+  height: 25px;
+  margin-top: auto;
+  margin-bottom: auto;
+  border-radius: 4px;
+  text-align: center;
+  padding: 5px;
+  margin-right: 10%;
+  border: 1px solid black;
+}
+
+.github-link {
+  margin-right: 4px;
+}
+
+.x-button {
+  cursor: pointer;
+
+}
+
+.close-button {
+  cursor: pointer;
 }
