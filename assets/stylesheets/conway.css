@@ -272,6 +272,11 @@ body {
   font-family: Amiko;
 }
 
+
+div.popover-launcher:hover {
+  color: #002c8a;
+}
+
 .github-link {
   margin-right: 4px;
 }
@@ -289,6 +294,10 @@ body {
   margin-right: 15px;*/
 }
 
+div.x-button:hover {
+  background-color: #e4e4e4;
+}
+
 .close-button {
   cursor: pointer;
   text-align: center;
@@ -297,6 +306,10 @@ body {
   height: 30px;
   border-radius: 15px;
   border: 1px solid black;
+}
+
+div.close-button:hover {
+  background-color: #02b102;
 }
 
 .controls-item {
@@ -380,11 +393,59 @@ body {
   width: 100px;
   height: 100px;
   cursor: pointer;
+  z-index: 100;
+}
+
+.right-arrow-nav-btn {
+  position: absolute;
+  top: 40%;
+  right: 0%;
+}
+
+.left-arrow-nav-btn {
+  position: absolute;
+  top: 40%;
+  left: 0%;
+}
+
+.nav-arrow {
+  height: 100%;
+  width: 100%
+}
+
+.left-arrow {
+  transform: rotate(180deg);
+}
+
+.rules-text {
+  z-index: 5;
+  position: absolute;
+  top: 38%;
+  left: 40%
+
+}
+
+.controls-text {
+  z-index: 5;
+  position: absolute;
+  top: 38%;
+  left: 10%
+}
+
+.nav-arrow-container {
+  height: 13%;
+  width: 13%;
+  cursor: pointer;
+}
+.hideable-btn {
+  visibility: hidden;
+}
+
+.hideable-container {
+  display: none;
 }
 
 .credits {
-
-
   margin-top: auto;
   margin-bottom: auto;
   margin-left: 10%;
