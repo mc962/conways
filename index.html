@@ -13,6 +13,7 @@
   </head>
 
     <body>
+      <img class='background' src="./assets/images/geothermal.jpeg" alt="Primordial Soup">
       <div class="project-container">
 
       <div class="popover hidden-popover">
@@ -20,89 +21,93 @@
       </div>
 
       <div class='instructions hidden-instructions'>
-        <div class="x-button">
-          x
-        </div>
-        <h1 class='instructions-heading'>Instructions</h1>
-        <div class="petri-dish">
-          <img src="assets/images/cartoon-germ-virus.jpg" alt="germ" class='cell-picture' id='cell1'>
-        </div>
 
-        <header class='instructions-description'>
-          <p>
-            Primordial soup is a simulation of cellular automata, a simple model
-            of interaction between cells.
-          </p>
-          <p>
-            The rules are simple.
-          </p>
-        </header>
-        <div class="rules-container">
-          <label class="instructions-label" for="rules">Rules</label>
-          <ol id="rules" class='rules-list'>
-            <li class='rules-item'>Live cells are represented by green squares,
-              while dead cells are represented by orange cells.</li>
-              <li class='rules-item'>A living cell with less than 2 neighbors dies from 'loneliness'</li>
-              <li class='rules-item'>A living cell with 4 or more neighbors will die from overpopulation</li>
-              <li class='rules-item'>A living cell with 2 or 3 neighbors will remain living.</li>
-              <li class='rules-item'>A 'dead' cell space with exactly 3 neighbors will become alive on the next turn</li>
-              <li class='rules-item'>In this version the board is infinitely wrapped to itself,
-                a cell that goes off the board on the right will reappear on the left
-              </li>
-            </ol>
-        </div>
-
-
-        <div class="nav-arrow-container left-arrow-nav-btn hideable-btn">
-          <img class="nav-arrow left-arrow"src="./assets/images/green-arrow-right.png" alt="left-arrow">
-          <div class="rules-text">
-            Rules
+        <div class="top-content">
+          <div class="x-button">
+            x
           </div>
-        </div>
-
-
-        <div class="controls-container hideable-container">
-          <label class="instructions-label" for="controls">Controls</label>
-          <ul class='controls-list'>
-            <li class='controls-item'>
-              <i class="fa fa-play" aria-hidden="true"></i>
-              will resume the game from a paused state.
-            </li>
-            <li class='controls-item'>
-              <i class="fa fa-pause" aria-hidden="true"></i>
-              will stop the game from a moving state.
-            </li>
-            <li class='controls-item'>Reset will reset the board to the shape used at the beginning of the round</li>
-            <li class='controls-item'>The slider can be used to control the speed of the game. As the speed increases,
-              the interval between each game tick and cell live/die cycle becomes shorter.
-            </li>
-            <li class='controls-item'>
-              The size menu can be used to select a board size from a list of preconfigured board sizes.
-              It is recommended that players on lower-end hardware (such as mobile phones) should not go above a
-              5000 square board size.
-            </li>
-            <li class='controls-item'>
-              The shapes menu can be used to select from a list of preconfigured shapes.
-              If the current board size is too small for the selected shape, it will <strong>automatically
-                resize the board</strong> to an acceptable size. A shape may still be manually be drawn by selecting and deselecting
-                squares with the mouse, and a blank board has been provided through the 'Cleared' option.
-              </li>
-            </ul>
-        </div>
-
-        <div class="nav-arrow-container right-arrow-nav-btn">
-          <img class="nav-arrow"src="./assets/images/green-arrow-right.png" alt="right-arrow">
-          <div class="controls-text">
-            Controls
+          <h1 class='instructions-heading'>Instructions</h1>
+          <div class="petri-dish">
+            <img src="assets/images/cartoon-germ-virus.jpg" alt="germ" class='cell-picture' id='cell1'>
           </div>
+
+          <header class='instructions-description'>
+            <p>
+              Primordial soup is a simulation of cellular automata, a simple model
+              of interaction between cells.
+            </p>
+            <p>
+              The rules are simple.
+            </p>
+          </header>
+          <div class="rules-container">
+            <label class="instructions-label" for="rules">Rules</label>
+            <ol id="rules" class='rules-list'>
+              <li class='rules-item'>Live cells are represented by green squares,
+                while dead cells are represented by orange cells.</li>
+                <li class='rules-item'>A living cell with less than 2 neighbors dies from 'loneliness'</li>
+                <li class='rules-item'>A living cell with 4 or more neighbors will die from overpopulation</li>
+                <li class='rules-item'>A living cell with 2 or 3 neighbors will remain living.</li>
+                <li class='rules-item'>A 'dead' cell space with exactly 3 neighbors will become alive on the next turn</li>
+                <li class='rules-item'>In this version the board is infinitely wrapped to itself,
+                  a cell that goes off the board on the right will reappear on the left
+                </li>
+              </ol>
+            </div>
+
+
+            <div class="nav-arrow-container left-arrow-nav-btn hideable-btn">
+              <img class="nav-arrow left-arrow"src="./assets/images/green-arrow-right.png" alt="left-arrow">
+              <div class="rules-text">
+                Rules
+              </div>
+            </div>
+
+
+            <div class="controls-container hideable-container">
+              <label class="instructions-label" for="controls">Controls</label>
+              <ul class='controls-list'>
+                <li class='controls-item'>
+                  <i class="fa fa-play" aria-hidden="true"></i>
+                  will resume the game from a paused state.
+                </li>
+                <li class='controls-item'>
+                  <i class="fa fa-pause" aria-hidden="true"></i>
+                  will stop the game from a moving state.
+                </li>
+                <li class='controls-item'>Reset will reset the board to the shape used at the beginning of the round</li>
+                <li class='controls-item'>The slider can be used to control the speed of the game. As the speed increases,
+                  the interval between each game tick and cell live/die cycle becomes shorter.
+                </li>
+                <li class='controls-item'>
+                  The size menu can be used to select a board size from a list of preconfigured board sizes.
+                  It is recommended that players on lower-end hardware (such as mobile phones) should not go above a
+                  5000 square board size.
+                </li>
+                <li class='controls-item'>
+                  The shapes menu can be used to select from a list of preconfigured shapes.
+                  If the current board size is too small for the selected shape, it will <strong>automatically
+                    resize the board</strong> to an acceptable size. A shape may still be manually be drawn by selecting and deselecting
+                    squares with the mouse, and a blank board has been provided through the 'Cleared' option.
+                  </li>
+                </ul>
+              </div>
+
+              <div class="nav-arrow-container right-arrow-nav-btn">
+                <img class="nav-arrow"src="./assets/images/green-arrow-right.png" alt="right-arrow">
+                <div class="controls-text">
+                  Controls
+                </div>
+              </div>
+
         </div>
 
         <footer class='lucky-message'>
           Enjoy, and good luck! Make some fun shapes!
+          <div class="close-button">
+            Close
+          </div>
         </footer>
-        <div class="close-button">
-          Close
-        </div>
       </div>
 
       <div class="popover-launcher">

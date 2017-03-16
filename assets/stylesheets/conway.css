@@ -38,12 +38,34 @@ table {
 
 /* Main */
 
-body {
+img.background {
+  /*rules to fill background*/
+  min-height: 100%;
+  min-width: 1700px;
+  /*set up proportionate scaling*/
+  width: 100%;
+  height: 100%;
+
+  /*set up positioning*/
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+@media screen and (max-width: 1700px) {
+  img.background {
+    left: 50%;
+    margin-left: -850px;
+  }
+}
+
+/*body {
   background-color: #BABABA;
   background-image: url('../images/geothermal.jpeg');
   background-repeat: no-repeat;
 
-}
+}*/
 
 .game-container {
 
@@ -198,11 +220,13 @@ body {
 }
 
 .shapes-label {
-  color: #f93600
+  color: #f93600;
+  text-shadow: 1px 1px black;
 }
 
 .sizes-label {
-  color: #f2ff49
+  color: #f2ff49;
+  text-shadow: 1px 1px black;
 }
 
 .board-size {
@@ -302,10 +326,11 @@ div.x-button:hover {
   cursor: pointer;
   text-align: center;
   line-height: 30px;
-  width: 100px;
-  height: 30px;
+  width: 70%;
+  height: 25%;
   border-radius: 15px;
   border: 1px solid black;
+  margin-top: 5%
 }
 
 div.close-button:hover {
@@ -313,12 +338,13 @@ div.close-button:hover {
 }
 
 .controls-item {
-  /*overflow-wrap: break-word;*/
+  margin-bottom: 3%;
 }
 .instructions-display {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   background-color: white;
   z-index: 50;
   position: fixed;
@@ -332,7 +358,7 @@ div.close-button:hover {
 }
 
 .instructions-description {
-    margin-bottom: 8px;
+    margin-bottom: 2%;
     text-align: center;
     width: 75%;
 }
@@ -350,6 +376,10 @@ div.close-button:hover {
   list-style-type: decimal;
 }
 
+.rules-item {
+  margin-bottom: 3%;
+}
+
 .controls-list {
   list-style-type: disc;
 }
@@ -362,8 +392,18 @@ div.close-button:hover {
 }
 
 .lucky-message {
+  display: flex;
+  flex-direction: column;
   margin-top: 10px;
   margin-bottom: 4px;
+  align-items: center;
+}
+
+.top-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 .instructions-heading {
   display: block;
@@ -378,6 +418,7 @@ div.close-button:hover {
 .instructions-label {
   text-align: center;
   font-weight: 700;
+  margin-bottom: 2%;
 }
 
 .petri-dish {
